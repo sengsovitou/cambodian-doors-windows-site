@@ -25,10 +25,92 @@ export default async function QuoteRequestPage({
           Tell us what you need and we&apos;ll get back to you with pricing.
         </p>
 
-        <form action={submitQuoteRequest} className="flex flex-col gap-5">
+        <form
+          action={submitQuoteRequest}
+          encType="multipart/form-data"
+          className="flex flex-col gap-5"
+        >
           <div>
             <label className="block text-sm text-neutral-400 mb-1">
-              Product
+              Reference Photo (optional)
+            </label>
+            <input
+              name="photo"
+              type="file"
+              accept="image/*"
+              className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3 text-neutral-400"
+            />
+          </div>
+          <div>
+            <label className="block text-sm text-neutral-400 mb-1">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-neutral-400 mb-1">
+                    Width (cm)
+                  </label>
+                  <input
+                    name="width"
+                    type="number"
+                    step="0.1"
+                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-neutral-400 mb-1">
+                    Height (cm)
+                  </label>
+                  <input
+                    name="height"
+                    type="number"
+                    step="0.1"
+                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-neutral-400 mb-1">
+                  Frame Type
+                </label>
+                <select
+                  name="frameType"
+                  className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3"
+                >
+                  <option value="">Select frame type (optional)</option>
+                  <option value="Aluminum">Aluminum</option>
+                  <option value="uPVC">uPVC</option>
+                  <option value="Steel">Steel</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm text-neutral-400 mb-1">
+                  Glass Type
+                </label>
+                <select
+                  name="glassType"
+                  className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3"
+                >
+                  <option value="">Select glass type (optional)</option>
+                  <option value="Clear Tempered">Clear Tempered</option>
+                  <option value="Frosted">Frosted</option>
+                  <option value="Tinted">Tinted</option>
+                  <option value="Laminated">Laminated</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm text-neutral-400 mb-1">
+                  Quantity
+                </label>
+                <input
+                  name="quantity"
+                  type="number"
+                  min="1"
+                  defaultValue="1"
+                  className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-3"
+                />
+              </div>
             </label>
             <select
               name="productId"
