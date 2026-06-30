@@ -21,7 +21,7 @@ export default async function ProductsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {products.map((product) => (
             
-              key={product.id}
+                key={product.id}
               href={`/products/${product.slug}`}
               className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-colors block"
             >

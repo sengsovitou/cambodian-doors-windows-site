@@ -8,7 +8,7 @@ export default function QuoteSuccessPage() {
         </p>
         
           href="/"
-          className="inline-block bg-white text-black font-semibold px-6 py-3 rounded-lg hover:bg-neutral-200 transition-colors"
+         className="inline-block bg-white text-black font-semibold px-6 py-3 rounded-lg hover:bg-neutral-200 transition-colors"
         >
           Back to Home
         </a>
