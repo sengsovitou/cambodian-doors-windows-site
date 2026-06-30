@@ -4,10 +4,129 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  nameKh      String?
+  nameZh      String?
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+}
+
+model Product {
+  id              String         @id @default(cuid())
+  name            String
+  nameKh          String?
+  nameZh          String?
+  slug            String         @unique
+  description     String?
+  materials       String?
+  colors          String[]
+  sizes           String[]
+  specifications  Json?
+  warranty        String?
+  price           Decimal?
+  featured        Boolean        @default(false)
+  category        Category       @relation(fields: [categoryId], references: [id])
+  categoryId      String
+  images          ProductImage[]
+  quoteItems      QuoteItem[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  order     Int      @default(0)
+}
+
+model QuoteRequest {
+  id              String      @id @default(cuid())
+  customerName    String
+  phone           String
+  email           String?
+  address         String?
+  notes           String?
+  status          QuoteStatus @default(PENDING)
+  items           QuoteItem[]
+  referenceImages String[]
+  createdAt       DateTime    @default(now())
+}
+
+model QuoteItem {
+  id             String       @id @default(cuid())
+  quoteRequest   QuoteRequest @relation(fields: [quoteRequestId], references: [id])
+  quoteRequestId String
+  product        Product      @relation(fields: [productId], references: [id])
+  productId      String
+  width          Float?
+  height         Float?
+  frameType      String?
+  glassType      String?
+  quantity       Int          @default(1)
+}
+
+enum QuoteStatus {
+  PENDING
+  REVIEWED
+  QUOTED
+  CONFIRMED
+  CANCELLED
+}
+
+model Project {
+  id          String         @id @default(cuid())
+  title       String
+  description String?
+  location    String?
+  images      ProjectImage[]
+  beforeAfter Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  url       String
+  isBefore  Boolean  @default(false)
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model BlogPost {
+  id         String    @id @default(cuid())
+  title      String
+  slug       String    @unique
+  content    String
+  coverImage String?
+  published  Boolean   @default(false)
+  author     AdminUser @relation(fields: [authorId], references: [id])
+  authorId   String
+  createdAt  DateTime  @default(now())
+}
+
+model AdminUser {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String
+  role      AdminRole  @default(STAFF)
+  posts     BlogPost[]
+  createdAt DateTime   @default(now())
+}
+
+enum AdminRole {
+  ADMIN
+  STAFF
 }
