@@ -1,0 +1,39 @@
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
+
+export default async function ProductsPage() {
+  const products = await prisma.product.findMany({
+    include: { category: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white px-8 py-16">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-2">All Products</h1>
+        <p className="text-neutral-400 mb-10">
+          Browse our full range of doors, windows, and glass installations.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {products.map((product) => (
+            
+              key={product.id}
+              href={`/products/${product.slug}`}
+              className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-colors block"
+            >
+              <span className="text-xs uppercase tracking-wide text-neutral-500">
+                {product.category.name}
+              </span>
+              <h3 className="text-xl font-semibold mt-2 mb-2">{product.name}</h3>
+              <p className="text-neutral-400 text-sm">{product.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
