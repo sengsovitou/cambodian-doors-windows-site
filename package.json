@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "better-auth": "tsx node_modules/better-auth/bin/generate.js"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@vercel/blob": "^2.5.0",
+    "better-auth": "^1.6.23",
     "next": "16.2.9",
     "pg": "^8.22.0",
     "prisma": "^7.8.0",
