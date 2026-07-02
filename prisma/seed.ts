@@ -1,12 +1,7 @@
 import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+import { prisma } from "../lib/prisma";
 
 async function main() {
-  // Clear existing data so this script is safe to re-run
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
 
@@ -74,7 +69,7 @@ async function main() {
     ],
   });
 
-  console.log("Seed data created successfully");
+  console.log("✅ Seed data created successfully");
 }
 
 main()

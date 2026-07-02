@@ -1,8 +1,7 @@
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   const products = await prisma.product.findMany({
@@ -18,21 +17,29 @@ export default async function ProductsPage() {
           Browse our full range of doors, windows, and glass installations.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {products.map((product) => (
-            
+        {products.length === 0 ? (
+          <p className="text-neutral-500">No products found yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <Link
                 key={product.id}
-              href={`/products/${product.slug}`}
-              className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-colors block"
-            >
-              <span className="text-xs uppercase tracking-wide text-neutral-500">
-                {product.category.name}
-              </span>
-              <h3 className="text-xl font-semibold mt-2 mb-2">{product.name}</h3>
-              <p className="text-neutral-400 text-sm">{product.description}</p>
-            </a>
-          ))}
-        </div>
+                href={`/products/${product.slug}`}
+                className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 hover:border-neutral-600 transition-colors block"
+              >
+                <span className="text-xs uppercase tracking-wide text-neutral-500">
+                  {product.category?.name ?? "Uncategorized"}
+                </span>
+                <h3 className="text-xl font-semibold mt-2 mb-2">
+                  {product.name}
+                </h3>
+                <p className="text-neutral-400 text-sm">
+                  {product.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
