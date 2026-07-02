@@ -27,6 +27,9 @@ export default function Header() {
           <a href="/gallery" className="hover:text-white transition-colors">
             Gallery
           </a>
+          <a href="/projects" className="hover:text-white transition-colors">
+            Projects
+          </a>
         </nav>
       </div>
     </header>

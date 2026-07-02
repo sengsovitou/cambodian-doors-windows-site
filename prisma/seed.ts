@@ -2,9 +2,16 @@ import "dotenv/config";
 import { prisma } from "../lib/prisma";
 
 async function main() {
+  // Clear all related data first (respect foreign key order)
+  await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
+  await prisma.galleryItem.deleteMany();
+  await prisma.projectImage.deleteMany();
+  await prisma.galleryItem.deleteMany();
+  await prisma.project.deleteMany();
 
+  // Create categories
   const categories = await Promise.all([
     prisma.category.create({
       data: { name: "Aluminum Doors", slug: "aluminum-doors" },
@@ -23,6 +30,7 @@ async function main() {
   const [aluminumDoors, slidingWindows, temperedGlass, showerGlass] =
     categories;
 
+  // Create products
   await prisma.product.createMany({
     data: [
       {
@@ -68,8 +76,8 @@ async function main() {
       },
     ],
   });
-  await prisma.galleryItem.deleteMany();
 
+  // Create gallery items
   await prisma.galleryItem.createMany({
     data: [
       {
@@ -101,6 +109,32 @@ async function main() {
         url: "https://placehold.co/800x600/1a1a1a/white?text=Folding+Door",
         title: "Folding Door System",
         category: "Aluminum Doors",
+      },
+    ],
+  });
+
+  // Create projects
+  await prisma.project.createMany({
+    data: [
+      {
+        title: "Modern Villa Sliding Doors",
+        description:
+          "Full installation of aluminum sliding doors for a luxury villa in Phnom Penh",
+        location: "Phnom Penh",
+        beforeAfter: true,
+      },
+      {
+        title: "Office Glass Partitions",
+        description:
+          "Custom tempered glass partitions for a corporate office space",
+        location: "Siem Reap",
+        beforeAfter: false,
+      },
+      {
+        title: "Shophouse Aluminum Windows",
+        description: "Complete window replacement for a 4-storey shophouse",
+        location: "Phnom Penh",
+        beforeAfter: true,
       },
     ],
   });
