@@ -8,21 +8,21 @@ interface PageProps {
 }
 
 export default async function GalleryPage({ searchParams }: PageProps) {
-  // Await searchParams (Required in Next.js 15+)
   const resolvedParams = await searchParams;
   const currentCategory = resolvedParams.category || "All";
 
-  // 1. Fetch ALL items just to extract unique categories dynamically
   const allItems = await prisma.galleryItem.findMany({
     select: { category: true },
   });
 
+  // Explicit type cast to eliminate null type
   const categories = [
     "All",
-    ...Array.from(new Set(allItems.map((i) => i.category).filter(Boolean))),
+    ...Array.from(
+      new Set(allItems.map((i) => i.category).filter(Boolean) as string[]),
+    ),
   ];
 
-  // 2. Fetch the filtered items for the grid
   const items = await prisma.galleryItem.findMany({
     where: currentCategory !== "All" ? { category: currentCategory } : {},
     orderBy: { createdAt: "desc" },
@@ -36,7 +36,6 @@ export default async function GalleryPage({ searchParams }: PageProps) {
           Browse our completed installations and projects.
         </p>
 
-        {/* Category Filter Tabs */}
         <div className="flex flex-wrap gap-2 mb-10 border-b border-neutral-800 pb-5">
           {categories.map((category) => {
             const isActive = currentCategory === category;
@@ -60,7 +59,6 @@ export default async function GalleryPage({ searchParams }: PageProps) {
           })}
         </div>
 
-        {/* Gallery Grid */}
         {items.length === 0 ? (
           <p className="text-neutral-500 text-center py-12">
             No items found in this category.
@@ -70,10 +68,8 @@ export default async function GalleryPage({ searchParams }: PageProps) {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-neutral-600 transition-colors forward-block"
+                className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden hover:border-neutral-600 transition-colors"
               >
-                {/* Note: If using external images, standard img tag is fine. 
-                    If using local paths or configured remote domains, consider next/image */}
                 <img
                   src={item.url}
                   alt={item.title ?? "Gallery image"}
