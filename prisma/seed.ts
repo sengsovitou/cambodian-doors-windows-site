@@ -68,6 +68,42 @@ async function main() {
       },
     ],
   });
+  await prisma.galleryItem.deleteMany();
+
+  await prisma.galleryItem.createMany({
+    data: [
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Sliding+Door",
+        title: "Sliding Door Installation",
+        category: "Aluminum Doors",
+      },
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Glass+Office",
+        title: "Office Glass Partition",
+        category: "Office Glass",
+      },
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Shower+Glass",
+        title: "Shower Glass Enclosure",
+        category: "Shower Glass",
+      },
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Window+Frame",
+        title: "Aluminum Window Frame",
+        category: "Sliding Windows",
+      },
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Tempered+Door",
+        title: "Tempered Glass Door",
+        category: "Tempered Glass Doors",
+      },
+      {
+        url: "https://placehold.co/800x600/1a1a1a/white?text=Folding+Door",
+        title: "Folding Door System",
+        category: "Aluminum Doors",
+      },
+    ],
+  });
 
   console.log("✅ Seed data created successfully");
 }

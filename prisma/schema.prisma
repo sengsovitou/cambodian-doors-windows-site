@@ -9,6 +9,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Category {
@@ -93,6 +94,7 @@ model Project {
   description String?
   location    String?
   images      ProjectImage[]
+  gallery     GalleryItem[]
   beforeAfter Boolean        @default(false)
   createdAt   DateTime       @default(now())
 }
@@ -129,4 +131,14 @@ model AdminUser {
 enum AdminRole {
   ADMIN
   STAFF
+}
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  url       String
+  title     String?
+  category  String?
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
 }

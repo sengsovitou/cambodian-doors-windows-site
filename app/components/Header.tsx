@@ -24,6 +24,9 @@ export default function Header() {
           >
             Get a Quote
           </a>
+          <a href="/gallery" className="hover:text-white transition-colors">
+            Gallery
+          </a>
         </nav>
       </div>
     </header>
