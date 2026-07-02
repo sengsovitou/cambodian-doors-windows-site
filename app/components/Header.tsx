@@ -12,6 +12,9 @@ export default function Header() {
           <a href="/products" className="hover:text-white transition-colors">
             Products
           </a>
+          <a href="/about" className="hover:text-white transition-colors">
+            About
+          </a>
           <a
             href="/quote-request"
             className="hover:text-white transition-colors"
