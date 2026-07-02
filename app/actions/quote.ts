@@ -1,12 +1,8 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { put } from "@vercel/blob";
-
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
 
 export async function submitQuoteRequest(formData: FormData) {
   const customerName = formData.get("customerName") as string;
