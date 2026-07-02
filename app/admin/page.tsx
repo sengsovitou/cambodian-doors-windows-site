@@ -21,12 +21,12 @@ export default async function AdminDashboard() {
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-10">
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          
+          <Link
             href="/"
             className="text-sm text-neutral-400 hover:text-white transition-colors"
           >
-            ← Back to Site
-          </a>
+            &larr; Back to Site
+          </Link>
         </div>
 
         {/* Stats */}
@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
               href="/admin/quotes"
               className="text-sm text-neutral-400 hover:text-white transition-colors"
             >
-              View all →
+              View all &rarr;
             </Link>
           </div>
 
@@ -79,8 +79,8 @@ export default async function AdminDashboard() {
                         quote.status === "PENDING"
                           ? "bg-yellow-900 text-yellow-400"
                           : quote.status === "CONFIRMED"
-                          ? "bg-green-900 text-green-400"
-                          : "bg-neutral-800 text-neutral-400"
+                            ? "bg-green-900 text-green-400"
+                            : "bg-neutral-800 text-neutral-400"
                       }`}
                     >
                       {quote.status}
