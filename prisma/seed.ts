@@ -138,6 +138,45 @@ async function main() {
       },
     ],
   });
+  await prisma.blogPost.deleteMany();
+  await prisma.adminUser.deleteMany();
+
+  const admin = await prisma.adminUser.create({
+    data: {
+      email: "admin@cmlwindows.com",
+      name: "CML Admin",
+      role: "ADMIN",
+    },
+  });
+
+  await prisma.blogPost.createMany({
+    data: [
+      {
+        title: "How to Choose the Right Aluminum Door for Your Home",
+        slug: "how-to-choose-aluminum-door",
+        content:
+          "Choosing the right aluminum door involves considering several factors including security, aesthetics, and budget. Aluminum doors are known for their durability, low maintenance, and modern appearance. When selecting a door, consider the frame thickness, glass type, locking mechanism, and finish color that best suits your home's style.",
+        published: true,
+        authorId: admin.id,
+      },
+      {
+        title: "Tempered Glass vs Regular Glass: What You Need to Know",
+        slug: "tempered-glass-vs-regular-glass",
+        content:
+          "Tempered glass is up to four times stronger than regular glass and is required by building codes in many applications. When broken, it shatters into small rounded pieces rather than sharp shards, making it much safer. For doors, shower enclosures, and partitions, tempered glass is always the recommended choice.",
+        published: true,
+        authorId: admin.id,
+      },
+      {
+        title: "5 Benefits of uPVC Windows for Cambodian Homes",
+        slug: "benefits-of-upvc-windows",
+        content:
+          "uPVC windows offer excellent thermal and sound insulation, making them ideal for Cambodia's hot and noisy urban environment. They are highly resistant to moisture, termites, and UV damage. Unlike aluminum, uPVC does not conduct heat, keeping your home cooler and reducing air conditioning costs significantly.",
+        published: true,
+        authorId: admin.id,
+      },
+    ],
+  });
 
   console.log("✅ Seed data created successfully");
 }

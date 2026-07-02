@@ -33,6 +33,9 @@ export default function Header() {
           <a href="/services" className="hover:text-white transition-colors">
             Services
           </a>
+          <a href="/blog" className="hover:text-white transition-colors">
+            Blog
+          </a>
         </nav>
       </div>
     </header>
