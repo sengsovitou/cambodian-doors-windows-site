@@ -6,8 +6,14 @@ const rawUrl = process.env.BETTER_AUTH_URL?.trim();
 const baseUrl =
   rawUrl && rawUrl.startsWith("http") ? rawUrl : "http://localhost:3000";
 
+const rawSecret = process.env.BETTER_AUTH_SECRET?.trim();
+const safeSecret =
+  rawSecret && rawSecret.length > 10
+    ? rawSecret
+    : "temp-fallback-secret-987654321";
+
 export const auth = betterAuth({
-  secret: process.env.BETTER_AUTH_SECRET ?? "temp-fallback-secret-987654321",
+  secret: safeSecret,
   baseURL: baseUrl,
   database: prismaAdapter(prisma, {
     provider: "postgresql",
