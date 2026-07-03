@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const { auth } = await import("@/lib/auth");
+    const authModule = await import("@/lib/auth");
+    const auth = authModule.auth;
 
     const result = await auth.api.signUpEmail({
       body: {
