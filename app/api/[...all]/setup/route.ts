@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    await auth.api.signUpEmail({
+    const result = await auth.api.signUpEmail({
       body: {
         name: "CML Admin",
         email: "admin@cmlwindows.com",
@@ -14,6 +14,7 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       message: "Admin account created",
+      data: result,
     });
   } catch (error) {
     return NextResponse.json({ error: String(error) }, { status: 500 });
