@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
-export function proxy(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect admin routes
+  // Protect all admin routes except login page
   if (
     pathname.match(/\/[^/]+\/admin/) &&
     !pathname.match(/\/[^/]+\/admin\/login/)
@@ -15,8 +15,9 @@ export function proxy(request: NextRequest) {
     const sessionToken = request.cookies.get(
       "better-auth.session_token",
     )?.value;
+    // No session token → redirect to login
     if (!sessionToken) {
-      const locale = pathname.split("/")[1];
+      const locale = pathname.split("/")[1] || "en";
       return NextResponse.redirect(
         new URL(`/${locale}/admin/login`, request.url),
       );
