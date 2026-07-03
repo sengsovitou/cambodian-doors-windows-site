@@ -1,13 +1,33 @@
-import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
+const mockProducts = [
+  {
+    id: "1",
+    name: "Premium Aluminum Sliding Door",
+    slug: "premium-aluminum-sliding-door",
+    description: "Sleek sliding door for modern homes",
+    category: { name: "Aluminum Doors" },
+  },
+  {
+    id: "2",
+    name: "Modern Sliding Window",
+    slug: "modern-sliding-window",
+    description: "Energy-efficient aluminum frame window",
+    category: { name: "Sliding Windows" },
+  },
+  {
+    id: "3",
+    name: "Frameless Tempered Glass Door",
+    slug: "frameless-tempered-glass-door",
+    description: "Minimalist design for offices",
+    category: { name: "Tempered Glass Doors" },
+  },
+];
+
 export default async function Home() {
-  const products = await prisma.product.findMany({
-    include: { category: true },
-    take: 6,
-  });
+  const products = mockProducts;
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
