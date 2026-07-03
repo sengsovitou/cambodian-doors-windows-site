@@ -7,7 +7,6 @@ const intlMiddleware = createMiddleware(routing);
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Protect all admin routes except login page
   if (
     pathname.match(/\/[^/]+\/admin/) &&
     !pathname.match(/\/[^/]+\/admin\/login/)
@@ -15,7 +14,6 @@ export default function middleware(request: NextRequest) {
     const sessionToken = request.cookies.get(
       "better-auth.session_token",
     )?.value;
-    // No session token → redirect to login
     if (!sessionToken) {
       const locale = pathname.split("/")[1] || "en";
       return NextResponse.redirect(
