@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate && prisma db push",
     "better-auth": "tsx node_modules/better-auth/bin/generate.js"
   },
   "dependencies": {
