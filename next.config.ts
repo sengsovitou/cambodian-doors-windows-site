@@ -1,3 +1,4 @@
+/** Cache bust v2 Jul03 - Force new build hash for auth URL fix */
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
