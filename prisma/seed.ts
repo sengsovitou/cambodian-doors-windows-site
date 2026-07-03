@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { prisma } from "../lib/prisma";
+import { auth } from "../lib/auth";
 
 async function main() {
   // Clear all related data first (respect foreign key order)
@@ -8,7 +9,6 @@ async function main() {
   await prisma.category.deleteMany();
   await prisma.galleryItem.deleteMany();
   await prisma.projectImage.deleteMany();
-  await prisma.galleryItem.deleteMany();
   await prisma.project.deleteMany();
 
   // Create categories
@@ -138,6 +138,7 @@ async function main() {
       },
     ],
   });
+
   await prisma.blogPost.deleteMany();
   await prisma.adminUser.deleteMany();
 
@@ -177,7 +178,6 @@ async function main() {
       },
     ],
   });
-  import { auth } from "../lib/auth";
 
   // Create admin user via Better Auth
   await auth.api.createUser({

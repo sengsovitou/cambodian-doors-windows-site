@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "services": "Services",
+    "gallery": "Gallery",
+    "projects": "Projects",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "quote": "Get a Quote"
+  },
+  "home": {
+    "hero_title": "Premium Doors & Windows",
+    "hero_subtitle": "Crafted aluminum, glass, and custom installations for modern Cambodian homes and businesses.",
+    "products_title": "Our Products"
+  },
+  "quote": {
+    "title": "Request a Quote",
+    "subtitle": "Tell us what you need and we'll get back to you with pricing.",
+    "submit": "Submit Request",
+    "success": "Thank you!",
+    "success_message": "Your quote request has been received. Our team will contact you shortly."
+  }
+}

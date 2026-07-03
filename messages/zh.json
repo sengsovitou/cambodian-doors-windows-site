@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "services": "服务",
+    "gallery": "图库",
+    "projects": "项目",
+    "about": "关于我们",
+    "blog": "博客",
+    "contact": "联系我们",
+    "quote": "获取报价"
+  },
+  "home": {
+    "hero_title": "优质门窗解决方案",
+    "hero_subtitle": "为柬埔寨现代家庭和企业提供铝合金、玻璃及定制安装服务。",
+    "products_title": "我们的产品"
+  },
+  "quote": {
+    "title": "申请报价",
+    "subtitle": "告诉我们您的需求，我们将尽快回复报价。",
+    "submit": "提交申请",
+    "success": "谢谢！",
+    "success_message": "您的报价申请已收到，我们的团队将尽快与您联系。"
+  }
+}
