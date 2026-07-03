@@ -1,8 +1,8 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { NextRequest } from "next/server";
 
-// Required default function export for next-intl proxy
-export default function proxy(request) {
+export default function proxy(request: NextRequest) {
   return createMiddleware(routing)(request);
 }
 
