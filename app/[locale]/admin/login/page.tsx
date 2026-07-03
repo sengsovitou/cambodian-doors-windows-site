@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
@@ -11,14 +10,23 @@ export default function AdminLoginPage() {
   const router = useRouter();
 
   async function handleLogin() {
-    const result = await authClient.signIn.email({
-      email,
-      password,
-    });
-    if (result.error) {
-      setError(result.error.message ?? "Login failed");
-    } else {
-      router.push("/admin");
+    try {
+      const response = await fetch("/api/auth/sign-in/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message ?? "Login failed");
+        return;
+      }
+
+      router.push("/en/admin");
+    } catch (err) {
+      setError("Login failed: " + String(err));
     }
   }
 
