@@ -10,11 +10,8 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL environment variable is missing");
 }
 
-// Append sslmode=require to connection string URL only
-const fullDbUrl = `${process.env.DATABASE_URL}?sslmode=require`;
-
 const pool = new Pool({
-  connectionString: fullDbUrl,
+  connectionString: process.env.DATABASE_URL,
   connectionTimeoutMillis: 30000,
   idleTimeoutMillis: 30000,
   max: 10,
