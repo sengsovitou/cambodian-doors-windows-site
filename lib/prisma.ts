@@ -15,10 +15,7 @@ const pool = new Pool({
   connectionTimeoutMillis: 30000,
   idleTimeoutMillis: 30000,
   max: 10,
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : undefined,
+  ssl: { rejectUnauthorized: false },
 });
 
 const adapter = new PrismaPg(pool);
