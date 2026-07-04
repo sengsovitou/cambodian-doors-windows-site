@@ -11,7 +11,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL + "?sslmode=require",
   connectionTimeoutMillis: 30000,
   idleTimeoutMillis: 30000,
   max: 10,
