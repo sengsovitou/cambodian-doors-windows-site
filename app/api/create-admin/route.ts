@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const authModule = await import("@/lib/auth");
     const auth = authModule.auth;
@@ -11,6 +11,7 @@ export async function GET() {
         email: "admin@cmlwindows.com",
         password: "admin123456",
       },
+      headers: request.headers,
     });
 
     return NextResponse.json({ success: true, result });
