@@ -2,7 +2,6 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma";
 
-// Use Vercel auto URL + explicit env var, no localhost fallback on production
 const baseUrl =
   process.env.BETTER_AUTH_URL?.trim() ||
   process.env.NEXT_PUBLIC_APP_URL?.trim() ||
